@@ -1,0 +1,52 @@
+package javaapplication9;
+import java.lang.*;
+import java.util.*;
+
+
+public class JavaApplication9 {
+	
+	public static void main(String[] args) {
+                int[][] m=new int[][]{{50000, 50000, 50000, 50000, 50000, 50000},
+                                      {50000, 50000, 50000, 50000, 50000, 50000},
+                                      {50000, 50000, 50000, 50000, 50000, 50000},
+                                      {50000, 50000, 50000, 50000, 50000, 50000},
+                                      {50000, 50000, 50000, 50000, 50000, 50000},
+                                      {50000, 50000, 50000, 50000, 50000, 50000},
+                                     };
+                int[][] s=new int[6][6];
+                int[][] input=new int[][]{{30, 35}, {35, 15}, {15, 5}, {5, 10}, {10, 20}, {20, 25}};
+                
+                for (int i=0; i<6; i++) {
+                    m[i][i]=0;
+                }
+                
+		for (int j=1; j<6; j++) {
+                    for (int i=(j-1); i>=0; i--) {
+                        int temp;
+                        for (int k=i; k<j; k++) {
+                        temp=m[i][k]+m[k+1][j]+input[i][0]*input[k][1]*input[j][1];
+                        //System.out.println(temp);
+                       // System.out.println(i+":"+j+":"+k);
+                        if (temp<m[i][j]) {
+                        m[i][j]=temp;
+                        s[i][j]=k;}
+                    }
+                    }
+                }
+                System.out.println("Result:"+m[0][5]);
+                for (int i=0; i<6; i++) {
+	       System.out.println(Arrays.toString(s[i]));}
+                printresult(s, 0, 5);
+                
+	}
+        
+         static void printresult(int[][] s, int i, int j) {
+            if (i==j) System.out.print("A"+j);
+            else {System.out.print("(");
+            printresult(s, i, s[i][j]);
+            printresult(s, s[i][j]+1, j);
+            System.out.print(")");
+            }
+        }
+
+}
